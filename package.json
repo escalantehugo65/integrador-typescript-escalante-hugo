@@ -1,0 +1,26 @@
+{
+  "name": "trabajo-typescript-integrador",
+  "version": "1.0.0",
+  "description": "Investigación de Typescript",
+  "homepage": "https://github.com/escalantehugo65/integrador-typescript-escalante-hugo#readme",
+  "bugs": {
+    "url": "https://github.com/escalantehugo65/integrador-typescript-escalante-hugo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escalantehugo65/integrador-typescript-escalante-hugo.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "tsx": "^4.23.15"
+  }
+}
