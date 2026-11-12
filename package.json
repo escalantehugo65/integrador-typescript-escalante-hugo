@@ -13,14 +13,17 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/01-introduccion.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/01-introduccion.ts",
+    "check": "tsc --noEmit",
+    "check:watch": "tsc --noEmit --watch",
+    "build": "tsc",
+    "start": "node --enable-source-maps dist/01-introduccion.js"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
-  },
-  "dependencies": {
-    "tsx": "^4.23.15"
+    "typescript": "^7.0.2",
+    "tsx": "^4.23.15",
+    "@types/node": "^24.0.0"
   }
 }

@@ -1,16 +1,48 @@
+# Trabajo Práctico Integrador 4: Investigación de TypeScript
+
+Autor: Hugo Escalante.
+
+## Instalación y ejecución
+
+Se necesita Node.js 24 y npm. Desde la carpeta del proyecto:
+
+```powershell
+npm install
+npm run check
+npm run build
+npm start
+```
+
+`npm run check` verifica los tipos. `npm run build` genera los archivos JavaScript en `dist`. `npm start` ejecuta el primer tema compilado. `npm run dev` ejecuta el primer tema con recarga al guardar.
+
+Cada tema también puede ejecutarse por separado:
+
+```powershell
+npx tsx src/01-introduccion.ts
+npx tsx src/02-herramientas.ts
+npx tsx src/03-tipos.ts
+npx tsx src/funciones.ts
+npx tsx src/05-interfaces-types.ts
+npx tsx src/06-enums-literales.ts
+```
+
+Para ejecutar los otros temas compilados, se utiliza `node dist/nombre-del-archivo.js` después de compilar.
+
+Hay un archivo por tema dentro de `src`. El tema 4 conserva el nombre `funciones.ts`. El glosario está en `GLOSARIO.md`. Cada archivo usa `export {};` para mantener sus declaraciones separadas de las de los demás archivos.
+
 ## Tema 1: ¿Qué es TypeScript?
 
-1-**¿Qué es TypeScript y quién lo desarrolla?**
+**1- ¿Qué es TypeScript y quién lo desarrolla?**
 
 TypeScript es un lenguaje desarrollado por Microsoft que se basa en JavaScript y agrega un sistema de tipos. Permite indicar qué clase de datos puede tener una variable, recibir una función o devolver una operación. Esto ayuda a detectar errores durante el desarrollo, antes de ejecutar el programa.
 
-2-**¿Qué diferencias tiene con JavaScript?**
+**2- ¿Qué diferencias tiene con JavaScript?**
 
 JavaScript utiliza tipos dinámicos: una variable puede recibir valores de diferentes tipos durante la ejecución. TypeScript agrega una comprobación estática que permite detectar usos incompatibles, como intentar asignar un texto a una variable definida como numérica.
 
 TypeScript puede obtener el tipo a partir del valor asignado o permitir que lo indiquemos explícitamente. Sus anotaciones de tipos se eliminan al convertir el código a JavaScript; no funcionan como validaciones automáticas durante la ejecución.
 
-3-**¿Qué ventajas ofrece?**
+**3- ¿Qué ventajas ofrece?**
 
 - Ayuda a detectar errores de tipos antes de ejecutar el programa.
 - Mejora el autocompletado y las sugerencias del editor.
@@ -20,9 +52,9 @@ TypeScript puede obtener el tipo a partir del valor asignado o permitir que lo i
 
 Estas ventajas no eliminan todos los errores: todavía es necesario probar el programa y validar los datos que recibe.
 
-4-**¿Cuál es su versión actual?**
+**4- ¿Cuál es su versión actual?**
 
-Al 5 de noviembre de 2026, la versión estable publicada es TypeScript **7.0.2**. También existe una versión **7.1 beta**, pero es una versión de prueba y no debe confundirse con la estable.
+Al 11 de noviembre de 2026, la versión estable publicada es TypeScript **7.0.2**. La versión del paquete puede comprobarse con `npm view typescript version`; la instalada se consulta con `npx tsc -v`.
 
 **Fuentes**
 
@@ -38,7 +70,7 @@ Versiones del paquete oficial en npm.
 
 
 
-**¿Cómo se instala TypeScript en un proyecto?**
+**1- ¿Cómo se instala TypeScript en un proyecto?**
 
 Primero se necesita tener Node.js y npm instalados. Si el proyecto todavía no tiene un archivo `package.json`, se lo inicializa con `npm init -y`.
 
@@ -46,13 +78,13 @@ Después se instala TypeScript dentro del proyecto con `npm install -D typescrip
 
 También se utiliza `tsx` para ejecutar archivos TypeScript durante el desarrollo y `@types/node` para que TypeScript reconozca las herramientas de Node.js.
 
-**¿Para qué sirve el archivo tsconfig.json?**
+**2- ¿Para qué sirve el archivo tsconfig.json?**
 
 Es el archivo de configuración del proyecto TypeScript. Permite indicar qué archivos se deben analizar, qué reglas de comprobación se aplican y cómo se genera el JavaScript.
 
 Por ejemplo, puede establecer que el código fuente esté en `src`, que el JavaScript generado se guarde en `dist` y que se utilice una comprobación estricta de tipos mediante `strict`.
 
-**¿Qué hace el comando tsc?**
+**3- ¿Qué hace el comando tsc?**
 
 `tsc` es el compilador de TypeScript. Comprueba los tipos del programa y puede generar archivos JavaScript a partir de los archivos TypeScript.
 
@@ -60,7 +92,7 @@ Al ejecutar `npx tsc` desde el proyecto, utiliza la configuración de `tsconfig.
 
 Si configuramos `noEmitOnError: true`, no genera JavaScript cuando encuentra errores. **El compilador no ejecuta el programa.**
 
-**¿Qué diferencia hay entre ejecutar un archivo con tsc, tsx y node?**
+**4- ¿Qué diferencia hay entre ejecutar un archivo con tsc, tsx y node?**
 
 - **`tsc`:** comprueba tipos y genera JavaScript. Después necesitamos ejecutar ese JavaScript con otra herramienta.
 - **`tsx`:** transforma y ejecuta archivos TypeScript sin que tengamos que compilarlos previamente en un paso separado. No comprueba los tipos, por lo que conviene acompañarlo con `tsc --noEmit`.
@@ -82,7 +114,7 @@ Soporte de TypeScript en Node.js.
 
 
 
-1-**¿Qué son los tipos string, number y boolean?**
+**1- ¿Qué son los tipos string, number y boolean?**
 
 Son tipos que permiten indicar qué clase de valor puede contener una variable:
 
@@ -92,7 +124,7 @@ Son tipos que permiten indicar qué clase de valor puede contener una variable:
 
 Los nombres de estos tipos se escriben en minúscula.
 
-2-**¿Cómo se declara un array con tipo?**
+**2- ¿Cómo se declara un array con tipo?**
 
 Se escribe el tipo de sus elementos seguido de corchetes. Por ejemplo:
 
@@ -100,7 +132,7 @@ Se escribe el tipo de sus elementos seguido de corchetes. Por ejemplo:
 
 `number[]` indica que es un arreglo cuyos elementos deben ser números. Para un arreglo de textos se utiliza `string[]`.
 
-3-**¿Qué es un tipo unión?**
+**3- ¿Qué es un tipo unión?**
 
 Es un tipo que permite valores de distintos tipos definidos, separados mediante el símbolo `|`.
 
@@ -110,11 +142,11 @@ Por ejemplo:
 
 La variable puede recibir un texto o un número, pero no un booleano.
 
-4-**¿Por qué se recomienda evitar any?**
+**4- ¿Por qué se recomienda evitar any?**
 
 Porque desactiva la comprobación de tipos sobre ese valor. Esto permite realizar operaciones incorrectas sin que TypeScript avise, lo que puede producir errores al ejecutar el programa.
 
-Por eso conviene definir tipos concretos o uniones. Si
+Por eso conviene definir tipos concretos o uniones. Si no conocemos el tipo de un dato, podemos usar `unknown` y comprobar su tipo antes de utilizarlo.
 
 
 
@@ -221,3 +253,18 @@ Un enum puede utilizarse cuando necesitamos agrupar constantes con nombres y acc
 Los tipos literales resultan útiles para restringir valores concretos, como roles de usuario, estados o métodos HTTP, sin generar un objeto adicional en JavaScript.
 
 En ambos casos, los datos externos deben validarse durante la ejecución: los tipos por sí solos no comprueban lo recibido desde una API o un formulario.
+
+
+## Fuentes consultadas
+
+- Material de la cátedra: Introducción a TypeScript 2026.
+- Tema 1: [Introducción oficial a TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html).
+- Tema 1: [Versiones del paquete TypeScript en npm](https://www.npmjs.com/package/typescript?activeTab=versions).
+- Tema 2: [Instalación de TypeScript](https://www.typescriptlang.org/download/).
+- Tema 2: [Configuración tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+- Tema 2: [Ejecución con tsx](https://tsx.is/).
+- Tema 2: [TypeScript en Node.js](https://nodejs.org/api/typescript.html).
+- Temas 3 y 5: [Tipos cotidianos, interfaces y alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html).
+- Tema 4: [Funciones](https://www.typescriptlang.org/docs/handbook/2/functions.html).
+- Tema 6: [Enums](https://www.typescriptlang.org/docs/handbook/enums.html).
+- Tema 6: [Tipos literales](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types).

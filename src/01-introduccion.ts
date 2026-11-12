@@ -1,3 +1,5 @@
-const nombre:string="Hugo";
+const nombre: string = "Hugo";
 
 console.log(nombre);
+
+export {};
